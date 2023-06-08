@@ -20,6 +20,7 @@ NGNIX Configuration file
 
 Config file for NGNIX server operating in a reverse proxy and accepting only HTTPS traffic :
 
+``` Linux
 #Server configuration for HTTPS traffic
 server {
     access_log /var/log/nginx/service_access_https.log main;
@@ -46,7 +47,7 @@ server {
     #include api_json_errors.conf;  # API client-friendly JSON errors
     #default_type application/json; # If no content-type, assume JSON
 }
-
+```
 Test & reload the nginx server
 
 ``` Linux
