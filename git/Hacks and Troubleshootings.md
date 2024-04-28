@@ -4,7 +4,7 @@ Its often the case some system/OS/tool/editor specific files were committed into
 
 This procedure guides on excluding unwanted files into git: 
 
-In this example, I took MacOs specific file [.DS_Store](https://en.wikipedia.org/wiki/.DS_Store), however it can be unwated file (e.g. .project. .settings, .vascode etc).
+In this example, I took MacOs specific file [.DS_Store](https://en.wikipedia.org/wiki/.DS_Store), however it can be unwated file (e.g. .project. .settings, .vscode etc).
 
 ##### Use case: .DS_Store flies are already comitted into repository in a specific directory
 
