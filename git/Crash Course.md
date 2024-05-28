@@ -7,6 +7,12 @@
   * Staging area - files with new changes (added, modifies, deleted lines) in several files
   * Commited files
 
+###### Git configuration
+
+```
+git configure 
+```
+
 ###### Repo initialization
 
 ```
