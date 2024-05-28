@@ -1,0 +1,165 @@
+# ============================== Filebeat inputs ===============================
+
+filebeat.inputs:
+
+# Each - is an input. Most options can be set at the input level, so
+# you can use different inputs for various configurations.
+
+
+- type: log
+  id: CHANNELSIBP01-logs
+  enabled: true 
+  reload.enabled: true
+  fields:
+    node_name : CHANNELSIBP01
+  paths:
+    - /logs/LUM0766LI/CHANNELSIBP01/**/*.log
+
+#- type: log
+#  id: CHANNELSIBP02-logs
+#  enabled: true
+#  reload.enabled: true
+#  fields:
+#    node_name : CHANNELSIBP02
+#  paths:
+#    - /logs/LUM0766LI/CHANNELSIBP02/**/*.log
+ 
+
+- type: log
+  id: SERVICESIBP01-logs
+  enabled:  true
+  reload.enabled: true
+  fields:
+    node_name : SERVICESIBP01
+  paths:
+    - /logs/LUM0766LI/SERVICESIBP01/**/*.log
+
+#- type: log
+#  id: SERVICESIBP02-logs
+#  enabled:  true
+#  reload.enabled: true
+#  fields:
+#    node_name : SERVICESIBP02
+#  paths:
+#    - /logs/LUM0766LI/SERVICESIBP02/**/*.log
+
+
+
+
+# ============================== Filebeat modules ==============================
+
+filebeat.config.modules:
+  # Glob pattern for configuration loading
+  path: ${path.config}/modules.d/*.yml
+
+  # Set to true to enable config reloading
+  reload.enabled: false
+
+  # Period on which files under path should be checked for changes
+  #reload.period: 10s
+
+# ======================= Elasticsearch template setting =======================
+
+setup.template.settings:
+  index.number_of_shards: 1
+  #index.codec: best_compression
+  #_source.enabled: false
+
+# ================================== Outputs ===================================
+
+# Configure what output to use when sending the data collected by the beat.
+
+# ---------------------------- Elasticsearch Output ----------------------------
+output.elasticsearch:
+  # Array of hosts to connect to.
+  hosts: ["https://optigen.opensearch.luminus.be:443"]
+  ssl.verification_mode: none
+  # Protocol - either `http` (default) or `https`.
+  bulk_max_size: 0
+  protocol: "https"
+  index: "%{[fields.node_name]}"
+  #username: "optigenadmin"
+  #password: "Dashboardtester99!"
+  username: "optifilebeats"
+  password: "Dpuy72s!"
+  compression_level: 9
+  
+
+#setup.template.name: "test-template"
+#setup.template.pattern: "test*"
+
+# ================================= Processors =================================
+processors:
+  - decode_xml:
+      fields:
+      - field: "message"
+        #target_field: "log_message"
+        to_lower: false
+        #ignore_missing: true 
+        #ignore_failure: true
+  - copy_fields:
+      fields: 
+        - from: message.messagelog.system.systemid
+          to: "Service Full Name"
+        - from: message.messagelog.system.componentid
+          to: "Service Operation"
+        - from: message.messagelog.loglevel
+          to: "Log Level"
+        - from: message.messagelog.messageheaderrequest.sendersystem.systemid
+          to: "Sender System"
+        - from: message.messagelog.messageheaderrequest.senderparty
+          to: "Sender Party"
+        - from: message.messagelog.messageheaderrequest.messageid
+          to: "Message ID"
+        - from: message.messagelog.messageheaderrequest.referenceid
+          to: "Reference ID"
+        - from: message.messagelog.messageheaderrequest.conversationid
+          to: "Conversation ID"
+        - from: message.messagelog.messageheaderrequest.activityid
+          to: "Activity ID"
+        - from: message.messagelog.messageheaderrequest.creationdatetime
+          to: "Creation Datetime"
+        - from: log.file.path
+          to: "Log File"
+        - from: message.messagelog.payload
+          to: "Payload"
+      ignore_missing: true
+  - drop_fields:
+       fields:
+       - agent.ephemeral_id
+       - agent.hostname
+       - agent.id
+       - agent.type
+       - agent.version
+       - host.name
+       - ecs.version
+       - input.type
+       #- fields.node_name
+       - agent.name
+       - log.file.path
+       - message
+       #- _type
+
+# ============================= Opensearch specific comatibility settings =======
+
+setup.ilm.enabled: false
+setup.ilm.overwrite: false
+
+setup.template.enabled: false
+
+setup.pack.security.enabled: false
+setup.xpack.graph.enabled: false
+setup.xpack.watcher.enabled: false
+setup.xpack.monitoring.enabled: false
+setup.xpack.reporting.enabled: false
+
+# ============================= Filebeat service log settings =======
+
+logging.level: error
+logging.to_files: true
+logging.to_syslog: false
+logging.selectors: [ harvester ]
+logging.files:
+  path: /var/log/filebeat
+  name: filebeat
+  keepfiles: 2
