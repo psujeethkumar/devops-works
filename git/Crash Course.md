@@ -10,3 +10,12 @@
 ###### Local Git Repositories
 
 ![1716918904065](image/CrashCourse/1716918904065.png)
+
+###### Git Branches
+
+
+
+
+###### References
+
+1. Got branching models
