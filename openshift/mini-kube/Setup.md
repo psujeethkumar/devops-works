@@ -96,4 +96,3 @@ This setpup is specific for the Redhat Linux version 9.4
     > kubectl get deployment nginx-test
 
     ```
-11.
