@@ -8,7 +8,7 @@ metadata:
     alertmanagerConfig: boa-app-alertmanagerconfig
 spec:
   route:
-    groupBy: ['alertname']
+    groupBy: ['pod']
     groupWait: 30s
     groupInterval: 2m
     repeatInterval: 2m
@@ -19,6 +19,9 @@ spec:
         - name: "job"
           value: "pod-restarts" 
           matchType: "="
+        - name: "job"
+          value: "cpu-not-set"
+          matchType: "=" 
   receivers:
     - name: slack-notifications
       slackConfigs:
