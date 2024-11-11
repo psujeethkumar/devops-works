@@ -1,0 +1,22 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: pod-restarts-alert
+  namespace: monitoring
+  labels:
+    app: kube-prometheus-stack
+    release: prometheus
+spec:
+  groups:
+    - name: api
+      rules:
+        - alert: PodRestartsAlert 
+          expr: sum by (namespace, pod) (kube_pod_status_phase{phase=~"Pending|Unknown|Failed", namespace="boa-app"}) >= 0 
+          for: 1m
+          labels:
+            # severity: critical
+            job: pod-restarts   
+            namespace: monitoring           
+          annotations:
+            summary: "Pod {{ $labels.pod }} in namespace {{ $labels.namespace }} has more than 5 restarts"
+            description: "The pod {{ $labels.pod }} in namespace {{ $labels.namespace }} has experienced more than 5 restarts."
