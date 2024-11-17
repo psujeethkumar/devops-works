@@ -1,4 +1,4 @@
-This setpup is specific for the Redhat Linux version 9.4
+This setpup is specific for the Redhat Linux version 9.4  Podman is used for underlying contianer runtime environment.
 
 1. Install podman
 
