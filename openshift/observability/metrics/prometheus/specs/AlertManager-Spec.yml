@@ -1,0 +1,1666 @@
+GROUP:      monitoring.coreos.com
+KIND:       AlertmanagerConfig
+VERSION:    v1alpha1
+
+DESCRIPTION:
+    AlertmanagerConfig configures the Prometheus Alertmanager,
+    specifying how alerts should be grouped, inhibited and notified to external
+    systems.
+    
+FIELDS:
+  apiVersion	<string>
+  kind	<string>
+  metadata	<ObjectMeta>
+    annotations	<map[string]string>
+    creationTimestamp	<string>
+    deletionGracePeriodSeconds	<integer>
+    deletionTimestamp	<string>
+    finalizers	<[]string>
+    generateName	<string>
+    generation	<integer>
+    labels	<map[string]string>
+    managedFields	<[]ManagedFieldsEntry>
+      apiVersion	<string>
+      fieldsType	<string>
+      fieldsV1	<FieldsV1>
+      manager	<string>
+      operation	<string>
+      subresource	<string>
+      time	<string>
+    name	<string>
+    namespace	<string>
+    ownerReferences	<[]OwnerReference>
+      apiVersion	<string> -required-
+      blockOwnerDeletion	<boolean>
+      controller	<boolean>
+      kind	<string> -required-
+      name	<string> -required-
+      uid	<string> -required-
+    resourceVersion	<string>
+    selfLink	<string>
+    uid	<string>
+  spec	<Object> -required-
+    inhibitRules	<[]Object>
+      equal	<[]string>
+      sourceMatch	<[]Object>
+        matchType	<string>
+        enum: !=, =, =~, !~
+        name	<string> -required-
+        regex	<boolean>
+        value	<string>
+      targetMatch	<[]Object>
+        matchType	<string>
+        enum: !=, =, =~, !~
+        name	<string> -required-
+        regex	<boolean>
+        value	<string>
+    muteTimeIntervals	<[]Object>
+      name	<string> -required-
+      timeIntervals	<[]Object>
+        daysOfMonth	<[]Object>
+          end	<integer>
+          start	<integer>
+        months	<[]string>
+        times	<[]Object>
+          endTime	<string>
+          startTime	<string>
+        weekdays	<[]string>
+        years	<[]string>
+    receivers	<[]Object>
+      discordConfigs	<[]Object>
+        apiURL	<Object> -required-
+          key	<string> -required-
+          name	<string>
+          optional	<boolean>
+        httpConfig	<Object>
+          authorization	<Object>
+            credentials	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            type	<string>
+          basicAuth	<Object>
+            password	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            username	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+          bearerTokenSecret	<Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          followRedirects	<boolean>
+          noProxy	<string>
+          oauth2	<Object>
+            clientId	<Object> -required-
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            clientSecret	<Object> -required-
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            endpointParams	<map[string]string>
+            noProxy	<string>
+            proxyConnectHeader	<map[string][]Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            proxyFromEnvironment	<boolean>
+            proxyUrl	<string>
+            scopes	<[]string>
+            tlsConfig	<Object>
+              ca	<Object>
+                configMap	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+                secret	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+              cert	<Object>
+                configMap	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+                secret	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+              insecureSkipVerify	<boolean>
+              keySecret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              maxVersion	<string>
+              enum: TLS10, TLS11, TLS12, TLS13
+              minVersion	<string>
+              enum: TLS10, TLS11, TLS12, TLS13
+              serverName	<string>
+            tokenUrl	<string> -required-
+          proxyConnectHeader	<map[string][]Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          proxyFromEnvironment	<boolean>
+          proxyUrl	<string>
+          tlsConfig	<Object>
+            ca	<Object>
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            cert	<Object>
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            insecureSkipVerify	<boolean>
+            keySecret	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            maxVersion	<string>
+            enum: TLS10, TLS11, TLS12, TLS13
+            minVersion	<string>
+            enum: TLS10, TLS11, TLS12, TLS13
+            serverName	<string>
+        message	<string>
+        sendResolved	<boolean>
+        title	<string>
+      emailConfigs	<[]Object>
+        authIdentity	<string>
+        authPassword	<Object>
+          key	<string> -required-
+          name	<string>
+          optional	<boolean>
+        authSecret	<Object>
+          key	<string> -required-
+          name	<string>
+          optional	<boolean>
+        authUsername	<string>
+        from	<string>
+        headers	<[]Object>
+          key	<string> -required-
+          value	<string> -required-
+        hello	<string>
+        html	<string>
+        requireTLS	<boolean>
+        sendResolved	<boolean>
+        smarthost	<string>
+        text	<string>
+        tlsConfig	<Object>
+          ca	<Object>
+            configMap	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            secret	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+          cert	<Object>
+            configMap	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            secret	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+          insecureSkipVerify	<boolean>
+          keySecret	<Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          maxVersion	<string>
+          enum: TLS10, TLS11, TLS12, TLS13
+          minVersion	<string>
+          enum: TLS10, TLS11, TLS12, TLS13
+          serverName	<string>
+        to	<string>
+      msteamsConfigs	<[]Object>
+        httpConfig	<Object>
+          authorization	<Object>
+            credentials	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            type	<string>
+          basicAuth	<Object>
+            password	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            username	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+          bearerTokenSecret	<Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          followRedirects	<boolean>
+          noProxy	<string>
+          oauth2	<Object>
+            clientId	<Object> -required-
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            clientSecret	<Object> -required-
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            endpointParams	<map[string]string>
+            noProxy	<string>
+            proxyConnectHeader	<map[string][]Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            proxyFromEnvironment	<boolean>
+            proxyUrl	<string>
+            scopes	<[]string>
+            tlsConfig	<Object>
+              ca	<Object>
+                configMap	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+                secret	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+              cert	<Object>
+                configMap	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+                secret	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+              insecureSkipVerify	<boolean>
+              keySecret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              maxVersion	<string>
+              enum: TLS10, TLS11, TLS12, TLS13
+              minVersion	<string>
+              enum: TLS10, TLS11, TLS12, TLS13
+              serverName	<string>
+            tokenUrl	<string> -required-
+          proxyConnectHeader	<map[string][]Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          proxyFromEnvironment	<boolean>
+          proxyUrl	<string>
+          tlsConfig	<Object>
+            ca	<Object>
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            cert	<Object>
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            insecureSkipVerify	<boolean>
+            keySecret	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            maxVersion	<string>
+            enum: TLS10, TLS11, TLS12, TLS13
+            minVersion	<string>
+            enum: TLS10, TLS11, TLS12, TLS13
+            serverName	<string>
+        sendResolved	<boolean>
+        summary	<string>
+        text	<string>
+        title	<string>
+        webhookUrl	<Object> -required-
+          key	<string> -required-
+          name	<string>
+          optional	<boolean>
+      name	<string> -required-
+      opsgenieConfigs	<[]Object>
+        actions	<string>
+        apiKey	<Object>
+          key	<string> -required-
+          name	<string>
+          optional	<boolean>
+        apiURL	<string>
+        description	<string>
+        details	<[]Object>
+          key	<string> -required-
+          value	<string> -required-
+        entity	<string>
+        httpConfig	<Object>
+          authorization	<Object>
+            credentials	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            type	<string>
+          basicAuth	<Object>
+            password	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            username	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+          bearerTokenSecret	<Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          followRedirects	<boolean>
+          noProxy	<string>
+          oauth2	<Object>
+            clientId	<Object> -required-
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            clientSecret	<Object> -required-
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            endpointParams	<map[string]string>
+            noProxy	<string>
+            proxyConnectHeader	<map[string][]Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            proxyFromEnvironment	<boolean>
+            proxyUrl	<string>
+            scopes	<[]string>
+            tlsConfig	<Object>
+              ca	<Object>
+                configMap	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+                secret	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+              cert	<Object>
+                configMap	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+                secret	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+              insecureSkipVerify	<boolean>
+              keySecret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              maxVersion	<string>
+              enum: TLS10, TLS11, TLS12, TLS13
+              minVersion	<string>
+              enum: TLS10, TLS11, TLS12, TLS13
+              serverName	<string>
+            tokenUrl	<string> -required-
+          proxyConnectHeader	<map[string][]Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          proxyFromEnvironment	<boolean>
+          proxyUrl	<string>
+          tlsConfig	<Object>
+            ca	<Object>
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            cert	<Object>
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            insecureSkipVerify	<boolean>
+            keySecret	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            maxVersion	<string>
+            enum: TLS10, TLS11, TLS12, TLS13
+            minVersion	<string>
+            enum: TLS10, TLS11, TLS12, TLS13
+            serverName	<string>
+        message	<string>
+        note	<string>
+        priority	<string>
+        responders	<[]Object>
+          id	<string>
+          name	<string>
+          type	<string> -required-
+          username	<string>
+        sendResolved	<boolean>
+        source	<string>
+        tags	<string>
+        updateAlerts	<boolean>
+      pagerdutyConfigs	<[]Object>
+        class	<string>
+        client	<string>
+        clientURL	<string>
+        component	<string>
+        description	<string>
+        details	<[]Object>
+          key	<string> -required-
+          value	<string> -required-
+        group	<string>
+        httpConfig	<Object>
+          authorization	<Object>
+            credentials	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            type	<string>
+          basicAuth	<Object>
+            password	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            username	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+          bearerTokenSecret	<Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          followRedirects	<boolean>
+          noProxy	<string>
+          oauth2	<Object>
+            clientId	<Object> -required-
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            clientSecret	<Object> -required-
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            endpointParams	<map[string]string>
+            noProxy	<string>
+            proxyConnectHeader	<map[string][]Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            proxyFromEnvironment	<boolean>
+            proxyUrl	<string>
+            scopes	<[]string>
+            tlsConfig	<Object>
+              ca	<Object>
+                configMap	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+                secret	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+              cert	<Object>
+                configMap	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+                secret	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+              insecureSkipVerify	<boolean>
+              keySecret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              maxVersion	<string>
+              enum: TLS10, TLS11, TLS12, TLS13
+              minVersion	<string>
+              enum: TLS10, TLS11, TLS12, TLS13
+              serverName	<string>
+            tokenUrl	<string> -required-
+          proxyConnectHeader	<map[string][]Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          proxyFromEnvironment	<boolean>
+          proxyUrl	<string>
+          tlsConfig	<Object>
+            ca	<Object>
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            cert	<Object>
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            insecureSkipVerify	<boolean>
+            keySecret	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            maxVersion	<string>
+            enum: TLS10, TLS11, TLS12, TLS13
+            minVersion	<string>
+            enum: TLS10, TLS11, TLS12, TLS13
+            serverName	<string>
+        pagerDutyImageConfigs	<[]Object>
+          alt	<string>
+          href	<string>
+          src	<string>
+        pagerDutyLinkConfigs	<[]Object>
+          alt	<string>
+          href	<string>
+        routingKey	<Object>
+          key	<string> -required-
+          name	<string>
+          optional	<boolean>
+        sendResolved	<boolean>
+        serviceKey	<Object>
+          key	<string> -required-
+          name	<string>
+          optional	<boolean>
+        severity	<string>
+        source	<string>
+        url	<string>
+      pushoverConfigs	<[]Object>
+        device	<string>
+        expire	<string>
+        html	<boolean>
+        httpConfig	<Object>
+          authorization	<Object>
+            credentials	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            type	<string>
+          basicAuth	<Object>
+            password	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            username	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+          bearerTokenSecret	<Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          followRedirects	<boolean>
+          noProxy	<string>
+          oauth2	<Object>
+            clientId	<Object> -required-
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            clientSecret	<Object> -required-
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            endpointParams	<map[string]string>
+            noProxy	<string>
+            proxyConnectHeader	<map[string][]Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            proxyFromEnvironment	<boolean>
+            proxyUrl	<string>
+            scopes	<[]string>
+            tlsConfig	<Object>
+              ca	<Object>
+                configMap	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+                secret	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+              cert	<Object>
+                configMap	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+                secret	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+              insecureSkipVerify	<boolean>
+              keySecret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              maxVersion	<string>
+              enum: TLS10, TLS11, TLS12, TLS13
+              minVersion	<string>
+              enum: TLS10, TLS11, TLS12, TLS13
+              serverName	<string>
+            tokenUrl	<string> -required-
+          proxyConnectHeader	<map[string][]Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          proxyFromEnvironment	<boolean>
+          proxyUrl	<string>
+          tlsConfig	<Object>
+            ca	<Object>
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            cert	<Object>
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            insecureSkipVerify	<boolean>
+            keySecret	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            maxVersion	<string>
+            enum: TLS10, TLS11, TLS12, TLS13
+            minVersion	<string>
+            enum: TLS10, TLS11, TLS12, TLS13
+            serverName	<string>
+        message	<string>
+        priority	<string>
+        retry	<string>
+        sendResolved	<boolean>
+        sound	<string>
+        title	<string>
+        token	<Object>
+          key	<string> -required-
+          name	<string>
+          optional	<boolean>
+        tokenFile	<string>
+        ttl	<string>
+        url	<string>
+        urlTitle	<string>
+        userKey	<Object>
+          key	<string> -required-
+          name	<string>
+          optional	<boolean>
+        userKeyFile	<string>
+      slackConfigs	<[]Object>
+        actions	<[]Object>
+          confirm	<Object>
+            dismissText	<string>
+            okText	<string>
+            text	<string> -required-
+            title	<string>
+          name	<string>
+          style	<string>
+          text	<string> -required-
+          type	<string> -required-
+          url	<string>
+          value	<string>
+        apiURL	<Object>
+          key	<string> -required-
+          name	<string>
+          optional	<boolean>
+        callbackId	<string>
+        channel	<string>
+        color	<string>
+        fallback	<string>
+        fields	<[]Object>
+          short	<boolean>
+          title	<string> -required-
+          value	<string> -required-
+        footer	<string>
+        httpConfig	<Object>
+          authorization	<Object>
+            credentials	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            type	<string>
+          basicAuth	<Object>
+            password	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            username	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+          bearerTokenSecret	<Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          followRedirects	<boolean>
+          noProxy	<string>
+          oauth2	<Object>
+            clientId	<Object> -required-
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            clientSecret	<Object> -required-
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            endpointParams	<map[string]string>
+            noProxy	<string>
+            proxyConnectHeader	<map[string][]Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            proxyFromEnvironment	<boolean>
+            proxyUrl	<string>
+            scopes	<[]string>
+            tlsConfig	<Object>
+              ca	<Object>
+                configMap	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+                secret	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+              cert	<Object>
+                configMap	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+                secret	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+              insecureSkipVerify	<boolean>
+              keySecret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              maxVersion	<string>
+              enum: TLS10, TLS11, TLS12, TLS13
+              minVersion	<string>
+              enum: TLS10, TLS11, TLS12, TLS13
+              serverName	<string>
+            tokenUrl	<string> -required-
+          proxyConnectHeader	<map[string][]Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          proxyFromEnvironment	<boolean>
+          proxyUrl	<string>
+          tlsConfig	<Object>
+            ca	<Object>
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            cert	<Object>
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            insecureSkipVerify	<boolean>
+            keySecret	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            maxVersion	<string>
+            enum: TLS10, TLS11, TLS12, TLS13
+            minVersion	<string>
+            enum: TLS10, TLS11, TLS12, TLS13
+            serverName	<string>
+        iconEmoji	<string>
+        iconURL	<string>
+        imageURL	<string>
+        linkNames	<boolean>
+        mrkdwnIn	<[]string>
+        pretext	<string>
+        sendResolved	<boolean>
+        shortFields	<boolean>
+        text	<string>
+        thumbURL	<string>
+        title	<string>
+        titleLink	<string>
+        username	<string>
+      snsConfigs	<[]Object>
+        apiURL	<string>
+        attributes	<map[string]string>
+        httpConfig	<Object>
+          authorization	<Object>
+            credentials	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            type	<string>
+          basicAuth	<Object>
+            password	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            username	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+          bearerTokenSecret	<Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          followRedirects	<boolean>
+          noProxy	<string>
+          oauth2	<Object>
+            clientId	<Object> -required-
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            clientSecret	<Object> -required-
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            endpointParams	<map[string]string>
+            noProxy	<string>
+            proxyConnectHeader	<map[string][]Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            proxyFromEnvironment	<boolean>
+            proxyUrl	<string>
+            scopes	<[]string>
+            tlsConfig	<Object>
+              ca	<Object>
+                configMap	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+                secret	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+              cert	<Object>
+                configMap	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+                secret	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+              insecureSkipVerify	<boolean>
+              keySecret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              maxVersion	<string>
+              enum: TLS10, TLS11, TLS12, TLS13
+              minVersion	<string>
+              enum: TLS10, TLS11, TLS12, TLS13
+              serverName	<string>
+            tokenUrl	<string> -required-
+          proxyConnectHeader	<map[string][]Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          proxyFromEnvironment	<boolean>
+          proxyUrl	<string>
+          tlsConfig	<Object>
+            ca	<Object>
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            cert	<Object>
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            insecureSkipVerify	<boolean>
+            keySecret	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            maxVersion	<string>
+            enum: TLS10, TLS11, TLS12, TLS13
+            minVersion	<string>
+            enum: TLS10, TLS11, TLS12, TLS13
+            serverName	<string>
+        message	<string>
+        phoneNumber	<string>
+        sendResolved	<boolean>
+        sigv4	<Object>
+          accessKey	<Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          profile	<string>
+          region	<string>
+          roleArn	<string>
+          secretKey	<Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+        subject	<string>
+        targetARN	<string>
+        topicARN	<string>
+      telegramConfigs	<[]Object>
+        apiURL	<string>
+        botToken	<Object>
+          key	<string> -required-
+          name	<string>
+          optional	<boolean>
+        botTokenFile	<string>
+        chatID	<integer> -required-
+        disableNotifications	<boolean>
+        httpConfig	<Object>
+          authorization	<Object>
+            credentials	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            type	<string>
+          basicAuth	<Object>
+            password	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            username	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+          bearerTokenSecret	<Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          followRedirects	<boolean>
+          noProxy	<string>
+          oauth2	<Object>
+            clientId	<Object> -required-
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            clientSecret	<Object> -required-
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            endpointParams	<map[string]string>
+            noProxy	<string>
+            proxyConnectHeader	<map[string][]Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            proxyFromEnvironment	<boolean>
+            proxyUrl	<string>
+            scopes	<[]string>
+            tlsConfig	<Object>
+              ca	<Object>
+                configMap	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+                secret	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+              cert	<Object>
+                configMap	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+                secret	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+              insecureSkipVerify	<boolean>
+              keySecret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              maxVersion	<string>
+              enum: TLS10, TLS11, TLS12, TLS13
+              minVersion	<string>
+              enum: TLS10, TLS11, TLS12, TLS13
+              serverName	<string>
+            tokenUrl	<string> -required-
+          proxyConnectHeader	<map[string][]Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          proxyFromEnvironment	<boolean>
+          proxyUrl	<string>
+          tlsConfig	<Object>
+            ca	<Object>
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            cert	<Object>
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            insecureSkipVerify	<boolean>
+            keySecret	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            maxVersion	<string>
+            enum: TLS10, TLS11, TLS12, TLS13
+            minVersion	<string>
+            enum: TLS10, TLS11, TLS12, TLS13
+            serverName	<string>
+        message	<string>
+        parseMode	<string>
+        enum: MarkdownV2, Markdown, HTML
+        sendResolved	<boolean>
+      victoropsConfigs	<[]Object>
+        apiKey	<Object>
+          key	<string> -required-
+          name	<string>
+          optional	<boolean>
+        apiUrl	<string>
+        customFields	<[]Object>
+          key	<string> -required-
+          value	<string> -required-
+        entityDisplayName	<string>
+        httpConfig	<Object>
+          authorization	<Object>
+            credentials	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            type	<string>
+          basicAuth	<Object>
+            password	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            username	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+          bearerTokenSecret	<Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          followRedirects	<boolean>
+          noProxy	<string>
+          oauth2	<Object>
+            clientId	<Object> -required-
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            clientSecret	<Object> -required-
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            endpointParams	<map[string]string>
+            noProxy	<string>
+            proxyConnectHeader	<map[string][]Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            proxyFromEnvironment	<boolean>
+            proxyUrl	<string>
+            scopes	<[]string>
+            tlsConfig	<Object>
+              ca	<Object>
+                configMap	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+                secret	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+              cert	<Object>
+                configMap	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+                secret	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+              insecureSkipVerify	<boolean>
+              keySecret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              maxVersion	<string>
+              enum: TLS10, TLS11, TLS12, TLS13
+              minVersion	<string>
+              enum: TLS10, TLS11, TLS12, TLS13
+              serverName	<string>
+            tokenUrl	<string> -required-
+          proxyConnectHeader	<map[string][]Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          proxyFromEnvironment	<boolean>
+          proxyUrl	<string>
+          tlsConfig	<Object>
+            ca	<Object>
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            cert	<Object>
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            insecureSkipVerify	<boolean>
+            keySecret	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            maxVersion	<string>
+            enum: TLS10, TLS11, TLS12, TLS13
+            minVersion	<string>
+            enum: TLS10, TLS11, TLS12, TLS13
+            serverName	<string>
+        messageType	<string>
+        monitoringTool	<string>
+        routingKey	<string>
+        sendResolved	<boolean>
+        stateMessage	<string>
+      webexConfigs	<[]Object>
+        apiURL	<string>
+        httpConfig	<Object>
+          authorization	<Object>
+            credentials	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            type	<string>
+          basicAuth	<Object>
+            password	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            username	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+          bearerTokenSecret	<Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          followRedirects	<boolean>
+          noProxy	<string>
+          oauth2	<Object>
+            clientId	<Object> -required-
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            clientSecret	<Object> -required-
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            endpointParams	<map[string]string>
+            noProxy	<string>
+            proxyConnectHeader	<map[string][]Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            proxyFromEnvironment	<boolean>
+            proxyUrl	<string>
+            scopes	<[]string>
+            tlsConfig	<Object>
+              ca	<Object>
+                configMap	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+                secret	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+              cert	<Object>
+                configMap	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+                secret	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+              insecureSkipVerify	<boolean>
+              keySecret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              maxVersion	<string>
+              enum: TLS10, TLS11, TLS12, TLS13
+              minVersion	<string>
+              enum: TLS10, TLS11, TLS12, TLS13
+              serverName	<string>
+            tokenUrl	<string> -required-
+          proxyConnectHeader	<map[string][]Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          proxyFromEnvironment	<boolean>
+          proxyUrl	<string>
+          tlsConfig	<Object>
+            ca	<Object>
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            cert	<Object>
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            insecureSkipVerify	<boolean>
+            keySecret	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            maxVersion	<string>
+            enum: TLS10, TLS11, TLS12, TLS13
+            minVersion	<string>
+            enum: TLS10, TLS11, TLS12, TLS13
+            serverName	<string>
+        message	<string>
+        roomID	<string> -required-
+        sendResolved	<boolean>
+      webhookConfigs	<[]Object>
+        httpConfig	<Object>
+          authorization	<Object>
+            credentials	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            type	<string>
+          basicAuth	<Object>
+            password	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            username	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+          bearerTokenSecret	<Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          followRedirects	<boolean>
+          noProxy	<string>
+          oauth2	<Object>
+            clientId	<Object> -required-
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            clientSecret	<Object> -required-
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            endpointParams	<map[string]string>
+            noProxy	<string>
+            proxyConnectHeader	<map[string][]Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            proxyFromEnvironment	<boolean>
+            proxyUrl	<string>
+            scopes	<[]string>
+            tlsConfig	<Object>
+              ca	<Object>
+                configMap	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+                secret	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+              cert	<Object>
+                configMap	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+                secret	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+              insecureSkipVerify	<boolean>
+              keySecret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              maxVersion	<string>
+              enum: TLS10, TLS11, TLS12, TLS13
+              minVersion	<string>
+              enum: TLS10, TLS11, TLS12, TLS13
+              serverName	<string>
+            tokenUrl	<string> -required-
+          proxyConnectHeader	<map[string][]Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          proxyFromEnvironment	<boolean>
+          proxyUrl	<string>
+          tlsConfig	<Object>
+            ca	<Object>
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            cert	<Object>
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            insecureSkipVerify	<boolean>
+            keySecret	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            maxVersion	<string>
+            enum: TLS10, TLS11, TLS12, TLS13
+            minVersion	<string>
+            enum: TLS10, TLS11, TLS12, TLS13
+            serverName	<string>
+        maxAlerts	<integer>
+        sendResolved	<boolean>
+        url	<string>
+        urlSecret	<Object>
+          key	<string> -required-
+          name	<string>
+          optional	<boolean>
+      wechatConfigs	<[]Object>
+        agentID	<string>
+        apiSecret	<Object>
+          key	<string> -required-
+          name	<string>
+          optional	<boolean>
+        apiURL	<string>
+        corpID	<string>
+        httpConfig	<Object>
+          authorization	<Object>
+            credentials	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            type	<string>
+          basicAuth	<Object>
+            password	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            username	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+          bearerTokenSecret	<Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          followRedirects	<boolean>
+          noProxy	<string>
+          oauth2	<Object>
+            clientId	<Object> -required-
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            clientSecret	<Object> -required-
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            endpointParams	<map[string]string>
+            noProxy	<string>
+            proxyConnectHeader	<map[string][]Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            proxyFromEnvironment	<boolean>
+            proxyUrl	<string>
+            scopes	<[]string>
+            tlsConfig	<Object>
+              ca	<Object>
+                configMap	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+                secret	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+              cert	<Object>
+                configMap	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+                secret	<Object>
+                  key	<string> -required-
+                  name	<string>
+                  optional	<boolean>
+              insecureSkipVerify	<boolean>
+              keySecret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              maxVersion	<string>
+              enum: TLS10, TLS11, TLS12, TLS13
+              minVersion	<string>
+              enum: TLS10, TLS11, TLS12, TLS13
+              serverName	<string>
+            tokenUrl	<string> -required-
+          proxyConnectHeader	<map[string][]Object>
+            key	<string> -required-
+            name	<string>
+            optional	<boolean>
+          proxyFromEnvironment	<boolean>
+          proxyUrl	<string>
+          tlsConfig	<Object>
+            ca	<Object>
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            cert	<Object>
+              configMap	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+              secret	<Object>
+                key	<string> -required-
+                name	<string>
+                optional	<boolean>
+            insecureSkipVerify	<boolean>
+            keySecret	<Object>
+              key	<string> -required-
+              name	<string>
+              optional	<boolean>
+            maxVersion	<string>
+            enum: TLS10, TLS11, TLS12, TLS13
+            minVersion	<string>
+            enum: TLS10, TLS11, TLS12, TLS13
+            serverName	<string>
+        message	<string>
+        messageType	<string>
+        sendResolved	<boolean>
+        toParty	<string>
+        toTag	<string>
+        toUser	<string>
+    route	<Object>
+      activeTimeIntervals	<[]string>
+      continue	<boolean>
+      groupBy	<[]string>
+      groupInterval	<string>
+      groupWait	<string>
+      matchers	<[]Object>
+        matchType	<string>
+        enum: !=, =, =~, !~
+        name	<string> -required-
+        regex	<boolean>
+        value	<string>
+      muteTimeIntervals	<[]string>
+      receiver	<string>
+      repeatInterval	<string>
+      routes	<[]Object>
+

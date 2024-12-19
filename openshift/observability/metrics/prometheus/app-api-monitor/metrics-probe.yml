@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: api-metrics-probe
+  namespace: api-monitor
+spec:
+  jobName: api-metrics
+  prober:
+    url: service-metrics.api-monitor.cluster.local:5000
+    path: /metrics
+  module: http_2xx
+  interval: 60s
+  scrapeTimeout: 30s
+  targets:
+    staticConfig:
+      labels:
+        app: bank-of-anthos
+      static:
+        - frontend:80

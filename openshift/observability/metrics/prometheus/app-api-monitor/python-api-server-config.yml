@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: python-api-server-config
+  namespace: api-monitor
+data:
+  index.py: |
+    from flask import Flask
+
+    app = Flask(__name__)
+    @app.route("/metrics", methods=['GET'])
+    def getfile():
+        with open("/usr/share/prom/status.txt", "r+") as f:
+            data = f.read()
+        return data
+
+    if __name__ == '__main__':
+        app.run(host='0.0.0.0')
