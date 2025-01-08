@@ -1,4 +1,3 @@
-
 Check opened ports :
 
 ```
@@ -10,7 +9,7 @@ iptables -L
 
 List actively used ports :
 
-``` 
+```
 netstat -tunlp
 ```
 
