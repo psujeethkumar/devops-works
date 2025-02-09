@@ -1,0 +1,170 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "2"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"application":"bank-of-anthos","environment":"development","team":"ledger","tier":"backend"},"name":"balancereader","namespace":"boa-app"},"spec":{"selector":{"matchLabels":{"app":"balancereader","application":"bank-of-anthos","environment":"development","team":"ledger","tier":"backend"}},"template":{"metadata":{"annotations":{"proxy.istio.io/config":"{ \"holdApplicationUntilProxyStarts\": true }"},"labels":{"app":"balancereader","application":"bank-of-anthos","environment":"development","team":"ledger","tier":"backend"}},"spec":{"containers":[{"env":[{"name":"VERSION","value":"v0.6.6"},{"name":"PORT","value":"8080"},{"name":"ENABLE_TRACING","value":"true"},{"name":"ENABLE_METRICS","value":"true"},{"name":"POLL_MS","value":"100"},{"name":"CACHE_SIZE","value":"1000000"},{"name":"JVM_OPTS","value":"-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -Xms256m -Xmx512m"},{"name":"LOG_LEVEL","value":"info"},{"name":"NAMESPACE","valueFrom":{"fieldRef":{"fieldPath":"metadata.namespace"}}}],"envFrom":[{"configMapRef":{"name":"environment-config"}},{"configMapRef":{"name":"ledger-db-config"}}],"image":"us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/balancereader:v0.6.6@sha256:cd9dee677105ac2a8310a624f774382d9b119887637a7e396f253f89aa70f2d5","livenessProbe":{"httpGet":{"path":"/healthy","port":8080},"initialDelaySeconds":120,"periodSeconds":5,"timeoutSeconds":10},"name":"balancereader","readinessProbe":{"httpGet":{"path":"/ready","port":8080},"initialDelaySeconds":60,"periodSeconds":5,"timeoutSeconds":10},"resources":{"limits":{"cpu":"500m","ephemeral-storage":"0.5Gi","memory":"512Mi"},"requests":{"cpu":"100m","ephemeral-storage":"0.5Gi","memory":"256Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["all"]},"privileged":false,"readOnlyRootFilesystem":true},"startupProbe":{"failureThreshold":30,"httpGet":{"path":"/healthy","port":8080},"periodSeconds":10},"volumeMounts":[{"mountPath":"/tmp","name":"tmp"},{"mountPath":"/tmp/.ssh","name":"publickey","readOnly":true}]}],"securityContext":{"fsGroup":1000,"runAsGroup":1000,"runAsNonRoot":true,"runAsUser":1000},"serviceAccountName":"bank-of-anthos","terminationGracePeriodSeconds":5,"volumes":[{"emptyDir":{},"name":"tmp"},{"name":"publickey","secret":{"items":[{"key":"jwtRS256.key.pub","path":"publickey"}],"secretName":"jwt-key"}}]}}}}
+  creationTimestamp: "2024-11-11T09:35:05Z"
+  generation: 2
+  labels:
+    application: bank-of-anthos
+    environment: development
+    team: ledger
+    tier: backend
+  name: balancereader
+  namespace: boa-app
+  resourceVersion: "975059"
+  uid: 5535bb8c-c415-4d4c-bfe8-77f14fd9634c
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: balancereader
+      application: bank-of-anthos
+      environment: development
+      team: ledger
+      tier: backend
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
+      creationTimestamp: null
+      labels:
+        app: balancereader
+        application: bank-of-anthos
+        environment: development
+        team: ledger
+        tier: backend
+    spec:
+      containers:
+      - env:
+        - name: VERSION
+          value: v0.6.6
+        - name: PORT
+          value: "8080"
+        - name: ENABLE_TRACING
+          value: "true"
+        - name: ENABLE_METRICS
+          value: "true"
+        - name: POLL_MS
+          value: "100"
+        - name: CACHE_SIZE
+          value: "1000000"
+        - name: JVM_OPTS
+          value: -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap
+            -Xms256m -Xmx512m
+        - name: LOG_LEVEL
+          value: info
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        envFrom:
+        - configMapRef:
+            name: environment-config
+        - configMapRef:
+            name: ledger-db-config
+        image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/balancereader-DUMMY:v0.6.6@sha256:cd9dee677105ac2a8310a624f774382d9b119887637a7e396f253f89aa70f2d5
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthy
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 120
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: balancereader
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /ready
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 10
+        resources:
+          limits:
+            cpu: 500m
+            ephemeral-storage: 512Mi
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            ephemeral-storage: 512Mi
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+        startupProbe:
+          failureThreshold: 30
+          httpGet:
+            path: /healthy
+            port: 8080
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmp
+        - mountPath: /tmp/.ssh
+          name: publickey
+          readOnly: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
+      serviceAccount: bank-of-anthos
+      serviceAccountName: bank-of-anthos
+      terminationGracePeriodSeconds: 5
+      volumes:
+      - emptyDir: {}
+        name: tmp
+      - name: publickey
+        secret:
+          defaultMode: 420
+          items:
+          - key: jwtRS256.key.pub
+            path: publickey
+          secretName: jwt-key
+status:
+  conditions:
+  - lastTransitionTime: "2024-11-11T09:35:05Z"
+    lastUpdateTime: "2024-11-11T09:35:05Z"
+    message: Deployment does not have minimum availability.
+    reason: MinimumReplicasUnavailable
+    status: "False"
+    type: Available
+  - lastTransitionTime: "2024-11-11T13:09:10Z"
+    lastUpdateTime: "2024-11-11T13:09:36Z"
+    message: ReplicaSet "balancereader-6567c8d779" is progressing.
+    reason: ReplicaSetUpdated
+    status: "True"
+    type: Progressing
+  observedGeneration: 2
+  replicas: 2
+  unavailableReplicas: 2
+  updatedReplicas: 1

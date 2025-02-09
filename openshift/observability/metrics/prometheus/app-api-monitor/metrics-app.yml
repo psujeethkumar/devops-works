@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: metrics-app
+  namespace: api-monitor
+  labels:
+    app: metrics-app
+spec:
+  volumes:
+  - name: shared
+    emptyDir: {}
+  - name: json-to-ts-config 
+    configMap:
+      name: "json-to-ts-config"
+  - name: python-api-server-config
+    configMap:
+      name: "python-api-server-config"
+  containers:
+  - name: json-to-ts-conversion
+    #image: docker.io/alpine
+    image: dwdraju/alpine-curl-jq
+    command: 
+    - "/bin/sh"
+    args: 
+    - "-c"
+    - "cp /usr/share/scripts/conversion.sh /usr/share/conversion.sh;
+        while true; 
+          do  
+            chmod 777 /usr/share/conversion.sh; 
+            /usr/share/conversion.sh ; 
+            sleep 10; 
+            done"
+    volumeMounts:
+    - name: shared
+      mountPath: /usr/share/prom
+    - name: json-to-ts-config
+      mountPath: /usr/share/scripts/conversion.sh
+      subPath: conversion.sh
+  - name: expose-metrics
+    image: python:3
+    command: 
+    - "/bin/sh"
+    args: 
+    - "-c" 
+    - "pip install flask flask_cors;
+       while true; 
+        do python /usr/share/python/index.py ; 
+       sleep 10; 
+       done"
+    ports:
+      - containerPort: 5000
+    volumeMounts:
+    - name: shared
+      mountPath: /usr/share/prom
+    - name: python-api-server-config
+      mountPath: /usr/share/python/index.py
+      subPath: index.py

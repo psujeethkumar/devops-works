@@ -1,0 +1,62 @@
+GROUP:      monitoring.coreos.com
+KIND:       PrometheusRule
+VERSION:    v1
+
+DESCRIPTION:
+    The `PrometheusRule` custom resource definition (CRD) defines
+    [alerting](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/)
+    and
+    [recording](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/)
+    rules to be evaluated by `Prometheus` or `ThanosRuler` objects.
+    
+    `Prometheus` and `ThanosRuler` objects select `PrometheusRule` objects using
+    label and namespace selectors.
+    
+FIELDS:
+  apiVersion	<string>
+  kind	<string>
+  metadata	<ObjectMeta>
+    annotations	<map[string]string>
+    creationTimestamp	<string>
+    deletionGracePeriodSeconds	<integer>
+    deletionTimestamp	<string>
+    finalizers	<[]string>
+    generateName	<string>
+    generation	<integer>
+    labels	<map[string]string>
+    managedFields	<[]ManagedFieldsEntry>
+      apiVersion	<string>
+      fieldsType	<string>
+      fieldsV1	<FieldsV1>
+      manager	<string>
+      operation	<string>
+      subresource	<string>
+      time	<string>
+    name	<string>
+    namespace	<string>
+    ownerReferences	<[]OwnerReference>
+      apiVersion	<string> -required-
+      blockOwnerDeletion	<boolean>
+      controller	<boolean>
+      kind	<string> -required-
+      name	<string> -required-
+      uid	<string> -required-
+    resourceVersion	<string>
+    selfLink	<string>
+    uid	<string>
+  spec	<Object> -required-
+    groups	<[]Object>
+      interval	<string>
+      limit	<integer>
+      name	<string> -required-
+      partial_response_strategy	<string>
+      query_offset	<string>
+      rules	<[]Object>
+        alert	<string>
+        annotations	<map[string]string>
+        expr	<Object> -required-
+        for	<string>
+        keep_firing_for	<string>
+        labels	<map[string]string>
+        record	<string>
+

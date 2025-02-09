@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rhel
+spec:
+ ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: rhel
+subsets:
+  - addresses:
+    - ip: 192.168.50.100
+    ports:
+    - port: 80
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rhel-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: rhel.test
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: rhel
+                port:
+                  number: 80
